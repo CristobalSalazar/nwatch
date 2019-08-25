@@ -8,16 +8,16 @@ If you have
 require('./file')
 </code>
 
-any changes in file.js will trigger a re-execution of code.
+any changes in file.js and it's dependencies will also trigger a re-execution of code.
 
 # linking
 
-in order to use nwatch without typing <kbd>node watch fileToWatch.js</kbd>.
+in order to use nwatch without typing <code>node watch fileToWatch.js</code>
 
 <ol>
-	<li>Mark watch.js as executable by typing <kbd>chmod +x watch.js<kbd>.
-	<li>run <kbd>npm link<kbd>
-	<li>You can now run nwatch from your command line by typing <kbd>nwatch fileToWatch.js<kbd>
+	<li>Mark watch.js as executable by typing <code>chmod +x watch.js</code>.
+	<li>run <code>npm link</code>
+	<li>You can now run nwatch from your command line by typing <code>nwatch fileToWatch.js</code>
 </ol>
 
 
