@@ -16,9 +16,9 @@ function getArgs(flatten = false) {
   return flatten ? args.join(' ') : args;
 }
 
-function climbDependencies(pathToFile) {
-  pathToDir = path.dirname(pathToFile);
-  fs.readFile(pathToFile, {encoding: 'utf8'}, (err, data) => {
+function climbDependencies(filepath) {
+  dirpath = path.dirname(filepath);
+  fs.readFile(filepath, {encoding: 'utf8'}, (err, data) => {
     if (err) throw err;
     if (!data) return;
 
@@ -46,18 +46,18 @@ function climbDependencies(pathToFile) {
         }
         if (i[0] === '.' || i[0] === '/') {
           // match is a local require and not a node_module
-          const pathToDependency = path.join(pathToDir, i);
-          if (!watchFiles.includes(pathToDependency)) {
-            watchFiles.push(pathToDependency);
-            console.log(pathToDependency);
+          const dependencyPath = path.join(dirpath, i);
+          if (!watchFiles.includes(dependencyPath)) {
+            watchFiles.push(dependencyPath);
+            console.log(dependencyPath);
             fs.watchFile(
-              pathToDependency,
+              dependencyPath,
               {interval: watchInterval},
               (curr, prev) => {
                 onFileChange();
               },
             );
-            climbDependencies(pathToDependency);
+            climbDependencies(dependencyPath);
           }
         }
       }
