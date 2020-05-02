@@ -2,7 +2,7 @@ const fs = require("fs");
 module.exports = { getLocalFilePaths, readFile };
 
 function getLocalFilePaths(content) {
-  const regex = /(?:require\s*\(\s*("|'|`))((\.{0,2}\/)+\w+)+\.\w+(?:("|'|`)\s*\))/g;
+  const regex = /(?:require\s*\(\s*("|'|`))((\.{0,2}\/)+\w+)+(\.\w+)*(?:("|'|`)\s*\))/g;
   const quoteRegex = /("|'|`)/;
   const matches = content.match(regex) || [];
   // not ideal, would like to use exclusion groups
