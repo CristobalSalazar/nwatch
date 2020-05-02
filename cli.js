@@ -3,8 +3,14 @@ const fs = require("fs");
 const path = require("path");
 const { execFile } = require("child_process");
 const util = require("./util");
+const { Command } = require("commander");
+const program = new Command();
+program.version = require("./package.json").version;
+program.option("-a, --attach", "Attach stdin and stdout to terminal").option("-f, --file", "File to watch");
+program.parse(process.argv);
+
+var mainProcess;
 const entryFile = path.join(process.cwd(), getArgs()[0]);
-var nodeProcess;
 
 async function main() {
   watchFile(entryFile);
@@ -42,7 +48,7 @@ function watchFile(path) {
 }
 
 function startProcess() {
-  console.clear();
-  if (nodeProcess) nodeProcess.kill();
-  nodeProcess = execFile(entryFile);
+  program.attach && console.clear();
+  if (mainProcess) mainProcess.kill();
+  mainProcess = execFile(entryFile, { shell: program.attach });
 }

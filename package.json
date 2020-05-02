@@ -10,5 +10,8 @@
   "license": "GPL-3.0-or-later",
   "bin": {
     "nwatch": "./cli.js"
+  },
+  "dependencies": {
+    "commander": "^5.1.0"
   }
 }
