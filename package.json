@@ -4,11 +4,12 @@
   "description": "a utility package for running node files on save",
   "main": "watch.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "npm link"
   },
   "author": "Cristobal Salazar",
   "license": "GPL-3.0-or-later",
   "bin": {
-    "nwatch": "./watch.js"
+    "nwatch": "./cli.js"
   }
 }
